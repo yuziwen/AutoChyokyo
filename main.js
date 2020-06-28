@@ -20,7 +20,9 @@ function setup() {
   fft = new p5.FFT();
   mic.connect(fft);
 
+  userStartAudio();
 
+  
   frameRate(30);
 }
 
@@ -66,12 +68,11 @@ function drawSpectrum(spectrum) {
 
 function printPitch(spectrum) {
   let pitch = guessPitchName(spectrum);
-  textSize(20);fill(20);noStroke();
-  text(pitch,width/2-5,25);
+  textSize(20); fill(20); noStroke();
+  text(pitch, width / 2 - 5, 25);
 }
 
 function guessPitchName(spectrum) {
-  console.log(spectrum);
   let peakFreq = getPeakFreq();
   let semiFromA4 = Math.round(12 * Math.log2(peakFreq / 440));
   let pitchNames = [
@@ -90,8 +91,6 @@ function guessPitchName(spectrum) {
         peakVal = spectrum[i];
       }
     }
-    console.log(peakVal);
-    console.log(peakFreq);
     return peakFreq;
   }
 }
